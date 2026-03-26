@@ -8,7 +8,7 @@ class CameraWindow:
     def read_frame(self):
         ret, frame = self.cap.read()
         if ret:
-            frame = cv2.flip(frame, -1)
+            frame = cv2.flip(frame, 1)
         return ret, frame
     
     def show(self, frame):
