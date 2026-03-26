@@ -18,10 +18,10 @@ class HandDrawer:
         h, w, _ = image.shape
         
         for idx1, idx2 in self.connections:
-            pt1 = hand_landmarks[idx1]
-            pt2 = hand_landmarks[idx2]
-            x1, y1 = int(pt1.x * w), int(pt1.y * h)
-            x2, y2 = int(pt2.x * w), int(pt2.y * h)
+            point1 = hand_landmarks[idx1]
+            point2 = hand_landmarks[idx2]
+            x1, y1 = int(point1.x * w), int(point1.y * h)
+            x2, y2 = int(point2.x * w), int(point2.y * h)
             cv2.line(image, (x1, y1), (x2, y2), (0, 255, 0), self.line_thickness)
         
         for landmark in hand_landmarks:
