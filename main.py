@@ -11,7 +11,6 @@ def main():
     hand_detector = HandDetector()
     hand_drawer = HandDrawer()
     camera_window = CameraWindow()
-
     recognizer = HandGestureRecognizer()
     
     while True:
@@ -36,6 +35,17 @@ def main():
                 cv2.FONT_HERSHEY_SIMPLEX,
                 3,
                 (0, 0, 0),
+                18,
+                cv2.LINE_AA
+            )
+
+            cv2.putText(
+                frame,
+                f"Fingers: {total_fingers}",
+                (20, 80),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                3,
+                (255, 255, 255),
                 7,
                 cv2.LINE_AA
             )

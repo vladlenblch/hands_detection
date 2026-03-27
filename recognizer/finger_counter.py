@@ -4,7 +4,7 @@ from calculations.angle import calculate_angle
 class FingerCounter:
     def __init__(self):
         self.finger_ids = {
-            'thumb': {'tip': 4, 'ip': 3, 'mcp': 2},
+            'thumb': {'tip': 4, 'ip': 3, 'mcp': 2, 'cmc': 1},
             'index': {'tip': 8, 'pip': 6, 'mcp': 5},
             'middle': {'tip': 12, 'pip': 10, 'mcp': 9},
             'ring': {'tip': 16, 'pip': 14, 'mcp': 13},
@@ -15,17 +15,22 @@ class FingerCounter:
     def detect(self, landmarks):
         fingers_up = 0
         wrist = landmarks[self.wrist_id]
-        
+
         thumb_tip = landmarks[self.finger_ids['thumb']['tip']]
         thumb_ip = landmarks[self.finger_ids['thumb']['ip']]
         thumb_mcp = landmarks[self.finger_ids['thumb']['mcp']]
-        
-        thumb_angle = calculate_angle(thumb_mcp, thumb_ip, thumb_tip)
-        
-        dist_tip_wrist = calculate_distance(thumb_tip, wrist)
-        dist_mcp_wrist = calculate_distance(thumb_mcp, wrist)
-        
-        if thumb_angle > 160 and dist_tip_wrist > dist_mcp_wrist * 1.2:
+        thumb_cmc = landmarks[self.finger_ids['thumb']['cmc']]
+
+        index_mcp = landmarks[self.finger_ids['index']['mcp']]
+
+        thumb_mcp_angle = calculate_angle(thumb_cmc, thumb_mcp, thumb_ip)
+
+        thumb_ip_angle = calculate_angle(thumb_mcp, thumb_ip, thumb_tip)
+
+        dist_thumb_tip_wrist = calculate_distance(thumb_tip, wrist)
+        dist_index_mcp_wrist = calculate_distance(index_mcp, wrist)
+
+        if thumb_mcp_angle > 160 and thumb_ip_angle > 140 and dist_thumb_tip_wrist > dist_index_mcp_wrist * 0.7:
             fingers_up += 1
         
         for finger_name in ['index', 'middle', 'ring', 'pinky']:
