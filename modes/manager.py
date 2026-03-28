@@ -32,16 +32,25 @@ class ModeManager:
 
     def draw_status(self, frame):
         mode_label = f"Mode: {self.current_mode_id} - {self.current_mode.name}"
-        controls_label = "0 Landmarks | 1 Finger Count | 2 Absolute Cinema | Q Quit"
 
         cv2.putText(frame, mode_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (0, 0, 0), 10, cv2.LINE_AA)
 
         cv2.putText(frame, mode_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (255, 255, 255), 5, cv2.LINE_AA)
+        
+        controls_label_1 = "0 Landmarks | 1 Finger Count | 2 Absolute Cinema"
 
-        cv2.putText(frame, controls_label, (20, frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX,
+        cv2.putText(frame, controls_label_1, (20, frame.shape[0] - 20 - 60), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (0, 0, 0), 10, cv2.LINE_AA)
 
-        cv2.putText(frame, controls_label, (20, frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX,
+        cv2.putText(frame, controls_label_1, (20, frame.shape[0] - 20 - 60), cv2.FONT_HERSHEY_SIMPLEX,
+                    1.8, (255, 255, 255), 5, cv2.LINE_AA)
+        
+        controls_label_2 = "3 Help Me | Q Quit"
+        
+        cv2.putText(frame, controls_label_2, (20, frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX,
+                    1.8, (0, 0, 0), 10, cv2.LINE_AA)
+        
+        cv2.putText(frame, controls_label_2, (20, frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (255, 255, 255), 5, cv2.LINE_AA)

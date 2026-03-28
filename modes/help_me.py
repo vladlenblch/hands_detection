@@ -1,44 +1,38 @@
-import random
 import cv2
-import os
 
 from recognizer.finger_counter import FingerCounter
 from modes.base import BaseMode
 
-class AbsoluteCinemaMode(BaseMode):
+class HelpMeMode(BaseMode):
     def __init__(self):
-        self.name = "Absolute Cinema"
+        self.name = "Help Me"
         self.finger_counter = FingerCounter()
         self.total_fingers = 0
-        self.image_paths = [
-            os.path.join("assets/absolute_cinema", filename)
-            for filename in os.listdir("assets/absolute_cinema")
-            if filename.endswith(".png")
-        ]
         self.is_showing_image = False
         self.current_image = None
     
     def begin_frame(self):
         self.total_fingers = 0
+        self.hand_detected = False
     
     def process_hand(self, landmarks):
+        self.hand_detected = True
         self.total_fingers += self.finger_counter.detect(landmarks)
-
-    def draw_overlay(self, frame):
-        if self.total_fingers == 10:
+    
+    def draw_overlay(self, frame):        
+        if self.hand_detected and self.total_fingers == 0:
             if not self.is_showing_image:
-                image_path = random.choice(self.image_paths)
-                self.current_image = cv2.imread(image_path)
+                self.current_image = cv2.imread("assets/help/cat_girl.png")
 
                 if self.current_image is not None:
-                    cv2.imshow("Absolute Cinema", self.current_image)
-                    cv2.moveWindow("Absolute Cinema", 300, 150)
+                    cv2.imshow("Help Me", self.current_image)
+                    cv2.moveWindow("Help Me", 550, 250)
                     self.is_showing_image = True
         else:
             self.close()
-
+    
     def close(self):
         if self.is_showing_image:
-            cv2.destroyWindow("Absolute Cinema")
+            cv2.destroyWindow("Help Me")
             self.is_showing_image = False
             self.current_image = None

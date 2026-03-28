@@ -5,6 +5,7 @@ from modes.manager import ModeManager
 from modes.landmarks_only import LandmarksOnlyMode
 from modes.finger_count import FingerCountMode
 from modes.absolute_cinema import AbsoluteCinemaMode
+from modes.help_me import HelpMeMode
 
 from core.camera_window import CameraWindow
 
@@ -17,7 +18,8 @@ def main():
         modes={
             0: LandmarksOnlyMode(),
             1: FingerCountMode(),
-            2: AbsoluteCinemaMode()
+            2: AbsoluteCinemaMode(),
+            3: HelpMeMode()
         },
         default_mode_id=0,
     )
