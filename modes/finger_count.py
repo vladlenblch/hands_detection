@@ -20,7 +20,6 @@ class FingerCountMode(BaseMode):
 
         cv2.putText(frame, label, (20, 110), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (0, 0, 0), 10, cv2.LINE_AA)
-
         cv2.putText(frame, label, (20, 110), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (255, 255, 255), 5, cv2.LINE_AA)
     

@@ -35,7 +35,6 @@ class ModeManager:
 
         cv2.putText(frame, mode_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (0, 0, 0), 10, cv2.LINE_AA)
-
         cv2.putText(frame, mode_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (255, 255, 255), 5, cv2.LINE_AA)
         
@@ -43,14 +42,12 @@ class ModeManager:
 
         cv2.putText(frame, controls_label_1, (20, frame.shape[0] - 20 - 60), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (0, 0, 0), 10, cv2.LINE_AA)
-
         cv2.putText(frame, controls_label_1, (20, frame.shape[0] - 20 - 60), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (255, 255, 255), 5, cv2.LINE_AA)
         
-        controls_label_2 = "3 Help Me | Q Quit"
+        controls_label_2 = "3 Help Me | 4 Six Seven | Q Quit"
         
         cv2.putText(frame, controls_label_2, (20, frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (0, 0, 0), 10, cv2.LINE_AA)
-        
         cv2.putText(frame, controls_label_2, (20, frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (255, 255, 255), 5, cv2.LINE_AA)
