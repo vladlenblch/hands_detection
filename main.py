@@ -36,9 +36,14 @@ def main():
             mode_manager.begin_frame()
 
             if results.hand_landmarks:
-                for hand_landmarks in results.hand_landmarks:
+                handedness_list = results.handedness or [None] * len(results.hand_landmarks)
+
+                for hand_landmarks, handedness in zip(results.hand_landmarks, handedness_list):
                     if mode_manager.current_mode_id == 0:
                         hand_drawer.draw(frame, hand_landmarks)
+                    elif mode_manager.current_mode_id == 5:
+                        handedness_name = handedness[0].category_name if handedness else None
+                        mode_manager.current_mode.process_hand(hand_landmarks, handedness_name)
                     else:
                         mode_manager.process_hand(hand_landmarks)
 
