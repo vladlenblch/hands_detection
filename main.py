@@ -9,6 +9,7 @@ from modes.help_me import HelpMeMode
 from modes.six_seven import SixSevenMode
 from modes.memes import MemesMode
 from modes.rock import RockMode
+from modes.paint import PaintMode
 
 from core.camera_window import CameraWindow
 
@@ -25,7 +26,8 @@ def main():
             3: HelpMeMode(),
             4: SixSevenMode(),
             5: MemesMode(),
-            6: RockMode()
+            6: RockMode(),
+            7: PaintMode(),
         },
         default_mode_id=0,
     )

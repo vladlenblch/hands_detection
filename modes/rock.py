@@ -1,8 +1,7 @@
 import os
 import pygame
 
-from recognizer.finger_counter import FingerCounter
-from recognizer.geometry import calculate_distance
+from recognizer.hand_checks import is_rock_hand
 from modes.base import BaseMode
 
 class RockMode(BaseMode):
@@ -10,7 +9,6 @@ class RockMode(BaseMode):
         self.name = "Rock"
         if not pygame.mixer.get_init():
             pygame.mixer.init()
-        self.finger_counter = FingerCounter()
         self.is_rock_gesture = False
         self.song_paths = [
             os.path.join("assets/songs", filename)
@@ -25,7 +23,7 @@ class RockMode(BaseMode):
         self.is_rock_gesture = False
     
     def process_hand(self, landmarks):
-        if self.is_rock_hand(landmarks):
+        if is_rock_hand(landmarks):
             self.is_rock_gesture = True
 
     def draw_overlay(self, frame):
@@ -46,28 +44,3 @@ class RockMode(BaseMode):
         pygame.mixer.music.load(song_path)
         pygame.mixer.music.play()
         self.is_playing_song = True
-
-    def is_rock_hand(self, landmarks):
-        return (
-            self.is_finger_up(landmarks, "index") and
-            not self.is_finger_up(landmarks, "middle") and
-            not self.is_finger_up(landmarks, "ring") and
-            self.is_finger_up(landmarks, "pinky")
-        )
-
-    def is_finger_up(self, landmarks, finger_name):
-        wrist = landmarks[self.finger_counter.wrist_id]
-
-        tip_id = self.finger_counter.finger_ids[finger_name]["tip"]
-        pip_id = self.finger_counter.finger_ids[finger_name]["pip"]
-        mcp_id = self.finger_counter.finger_ids[finger_name]["mcp"]
-
-        tip = landmarks[tip_id]
-        pip = landmarks[pip_id]
-        mcp = landmarks[mcp_id]
-
-        dist_tip_wrist = calculate_distance(tip, wrist)
-        dist_pip_wrist = calculate_distance(pip, wrist)
-        dist_mcp_wrist = calculate_distance(mcp, wrist)
-
-        return dist_tip_wrist > dist_pip_wrist * 1.2 and dist_tip_wrist > dist_mcp_wrist
