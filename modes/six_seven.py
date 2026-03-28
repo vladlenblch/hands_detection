@@ -56,7 +56,6 @@ class SixSevenMode(BaseMode):
 
         cv2.putText(frame, "6", left_text_position, cv2.FONT_HERSHEY_SIMPLEX,
                     5, (0, 0, 255), 25, cv2.LINE_AA)
-
         cv2.putText(frame, "7", right_text_position, cv2.FONT_HERSHEY_SIMPLEX,
                     5, (0, 0, 255), 25, cv2.LINE_AA)
 

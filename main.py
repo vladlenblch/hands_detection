@@ -7,6 +7,7 @@ from modes.finger_count import FingerCountMode
 from modes.absolute_cinema import AbsoluteCinemaMode
 from modes.help_me import HelpMeMode
 from modes.six_seven import SixSevenMode
+from modes.memes import MemesMode
 
 from core.camera_window import CameraWindow
 
@@ -21,7 +22,8 @@ def main():
             1: FingerCountMode(),
             2: AbsoluteCinemaMode(),
             3: HelpMeMode(),
-            4: SixSevenMode()
+            4: SixSevenMode(),
+            5: MemesMode()
         },
         default_mode_id=0,
     )
