@@ -35,8 +35,10 @@ def main():
 
             if results.hand_landmarks:
                 for hand_landmarks in results.hand_landmarks:
-                    mode_manager.process_hand(hand_landmarks)
-                    hand_drawer.draw(frame, hand_landmarks)
+                    if mode_manager.current_mode_id == 0:
+                        hand_drawer.draw(frame, hand_landmarks)
+                    else:
+                        mode_manager.process_hand(hand_landmarks)
 
             mode_manager.draw(frame)
             camera_window.show(frame)
