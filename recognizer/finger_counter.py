@@ -24,12 +24,12 @@ class FingerCounter:
 
         thumb_mcp_angle = calculate_angle(thumb_cmc, thumb_mcp, thumb_ip)
 
-        thumb_ip_angle = calculate_angle(thumb_mcp, thumb_ip, thumb_tip)
+        thumb_cmc_angle = calculate_angle(thumb_mcp, thumb_cmc, index_mcp)
 
         dist_thumb_tip_wrist = calculate_distance(thumb_tip, wrist)
         dist_index_mcp_wrist = calculate_distance(index_mcp, wrist)
 
-        if thumb_mcp_angle > 160 and thumb_ip_angle > 140 and dist_thumb_tip_wrist > dist_index_mcp_wrist * 0.7:
+        if (thumb_mcp_angle > 165 or thumb_cmc_angle > 30) and dist_thumb_tip_wrist > dist_index_mcp_wrist * 0.7:
             fingers_up += 1
         
         for finger_name in ['index', 'middle', 'ring', 'pinky']:

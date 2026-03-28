@@ -1,7 +1,11 @@
 from core.detector import HandDetector
 from core.drawer import HandDrawer
+
 from modes.manager import ModeManager
-from modes.definitions import LandmarkOnlyMode, FingerCountMode
+from modes.landmarks_only import LandmarksOnlyMode
+from modes.finger_count import FingerCountMode
+from modes.absolute_cinema import AbsoluteCinemaMode
+
 from core.camera_window import CameraWindow
 
 def main():
@@ -11,8 +15,9 @@ def main():
 
     mode_manager = ModeManager(
         modes={
-            0: LandmarkOnlyMode(),
+            0: LandmarksOnlyMode(),
             1: FingerCountMode(),
+            2: AbsoluteCinemaMode()
         },
         default_mode_id=0,
     )

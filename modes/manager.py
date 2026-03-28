@@ -13,6 +13,7 @@ class ModeManager:
         if mode_id not in self.modes or mode_id == self.current_mode_id:
             return
 
+        self.current_mode.close()
         self.current_mode_id = mode_id
 
     def handle_key(self, key):
@@ -31,7 +32,7 @@ class ModeManager:
 
     def draw_status(self, frame):
         mode_label = f"Mode: {self.current_mode_id} - {self.current_mode.name}"
-        controls_label = "0 Landmarks | 1 Finger Count | Q Quit"
+        controls_label = "0 Landmarks | 1 Finger Count | 2 Absolute Cinema | Q Quit"
 
         cv2.putText(frame, mode_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (0, 0, 0), 10, cv2.LINE_AA)

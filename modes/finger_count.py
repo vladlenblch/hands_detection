@@ -1,23 +1,7 @@
 import cv2
 
 from recognizer.finger_counter import FingerCounter
-
-class BaseMode:
-    def __init__(self):
-        self.name = "Base"
-
-    def begin_frame(self):
-        pass
-
-    def process_hand(self, landmarks):
-        pass
-
-    def draw_overlay(self, frame):
-        pass
-
-class LandmarkOnlyMode(BaseMode):
-    def __init__(self):
-        self.name = "Landmarks"
+from modes.base import BaseMode
 
 class FingerCountMode(BaseMode):
     def __init__(self):
@@ -39,3 +23,6 @@ class FingerCountMode(BaseMode):
 
         cv2.putText(frame, label, (20, 110), cv2.FONT_HERSHEY_SIMPLEX,
                     1.8, (255, 255, 255), 5, cv2.LINE_AA)
+    
+    def close(self):
+        pass
