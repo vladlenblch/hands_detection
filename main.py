@@ -1,59 +1,41 @@
-import cv2
-
 from core.detector import HandDetector
 from core.drawer import HandDrawer
-
-from ui.camera_window import CameraWindow
-
-from recognizer.aggregator import HandGestureRecognizer
+from modes.manager import ModeManager
+from modes.definitions import LandmarkOnlyMode, FingerCountMode
+from core.camera_window import CameraWindow
 
 def main():
     hand_detector = HandDetector()
     hand_drawer = HandDrawer()
     camera_window = CameraWindow()
-    recognizer = HandGestureRecognizer()
+
+    mode_manager = ModeManager(
+        modes={
+            0: LandmarkOnlyMode(),
+            1: FingerCountMode(),
+        },
+        default_mode_id=0,
+    )
     
     while True:
         ret, frame = camera_window.read_frame()
  
         if ret:
             results = hand_detector.detect(frame)
-
-            total_fingers = 0
+            mode_manager.begin_frame()
 
             if results.hand_landmarks:
                 for hand_landmarks in results.hand_landmarks:
-                    gesture_results = recognizer.process(landmarks=hand_landmarks)
-                    total_fingers += gesture_results['fingers_count']
-
+                    mode_manager.process_hand(hand_landmarks)
                     hand_drawer.draw(frame, hand_landmarks)
 
-            cv2.putText(
-                frame,
-                f"Fingers: {total_fingers}",
-                (20, 80),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                3,
-                (0, 0, 0),
-                18,
-                cv2.LINE_AA
-            )
-
-            cv2.putText(
-                frame,
-                f"Fingers: {total_fingers}",
-                (20, 80),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                3,
-                (255, 255, 255),
-                7,
-                cv2.LINE_AA
-            )
-            
+            mode_manager.draw(frame)
             camera_window.show(frame)
-            
-            if camera_window.wait_key() == ord('q'):
+
+            key = camera_window.wait_key()
+            if key == ord('q'):
                 break
+            mode_manager.handle_key(key)
     
     hand_detector.close()
     camera_window.close()

@@ -1,5 +1,4 @@
-from calculations.distance import calculate_distance
-from calculations.angle import calculate_angle
+from recognizer.geometry import calculate_distance, calculate_angle
 
 class FingerCounter:
     def __init__(self):

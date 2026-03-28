@@ -18,3 +18,6 @@ def calculate_angle(point1, point2, point3):
     angle = np.degrees(np.acos(cos_angle))
     
     return angle
+
+def calculate_distance(point1, point2):
+    return np.sqrt((point1.x - point2.x)**2 + (point1.y - point2.y)**2)
