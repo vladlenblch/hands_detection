@@ -14,7 +14,7 @@ class AbsoluteCinemaMode(BaseMode):
         self.image_paths = [
             os.path.join("assets/absolute_cinema", filename)
             for filename in os.listdir("assets/absolute_cinema")
-            if filename.endswith(".png")
+            if filename.endswith((".png", ".jpg", ".jpeg"))
         ]
         self.is_showing_image = False
         self.current_image = None

@@ -60,7 +60,7 @@ class MemesMode(BaseMode):
             self.show_current_image()
             self.left_x_history.clear()
             self.right_x_history.clear()
-            self.swipe_cooldown = 12
+            self.swipe_cooldown = 8
             return
 
         if self.is_right_hand_swipe_left():
@@ -68,7 +68,7 @@ class MemesMode(BaseMode):
             self.show_current_image()
             self.left_x_history.clear()
             self.right_x_history.clear()
-            self.swipe_cooldown = 12
+            self.swipe_cooldown = 8
             return
     
     def close(self):

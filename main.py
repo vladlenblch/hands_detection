@@ -8,6 +8,7 @@ from modes.absolute_cinema import AbsoluteCinemaMode
 from modes.help_me import HelpMeMode
 from modes.six_seven import SixSevenMode
 from modes.memes import MemesMode
+from modes.rock import RockMode
 
 from core.camera_window import CameraWindow
 
@@ -23,7 +24,8 @@ def main():
             2: AbsoluteCinemaMode(),
             3: HelpMeMode(),
             4: SixSevenMode(),
-            5: MemesMode()
+            5: MemesMode(),
+            6: RockMode()
         },
         default_mode_id=0,
     )
