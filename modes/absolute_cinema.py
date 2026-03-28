@@ -1,6 +1,7 @@
 import random
 import cv2
 import os
+import numpy as np
 
 from recognizer.finger_counter import FingerCounter
 from modes.base import BaseMode
@@ -17,6 +18,8 @@ class AbsoluteCinemaMode(BaseMode):
         ]
         self.is_showing_image = False
         self.current_image = None
+        self.box_width = 912
+        self.box_height = 608
     
     def begin_frame(self):
         self.total_fingers = 0
@@ -28,12 +31,12 @@ class AbsoluteCinemaMode(BaseMode):
         if self.total_fingers == 10:
             if not self.is_showing_image:
                 image_path = random.choice(self.image_paths)
-                self.current_image = cv2.imread(image_path)
+                image = cv2.imread(image_path)
 
-                if self.current_image is not None:
-                    cv2.imshow("Absolute Cinema", self.current_image)
-                    cv2.moveWindow("Absolute Cinema", 300, 150)
-                    self.is_showing_image = True
+                self.current_image = self.fit_image_to_box(image)
+                cv2.imshow("Absolute Cinema", self.current_image)
+                cv2.moveWindow("Absolute Cinema", (1512 - self.box_width) // 2, (982 - self.box_height) // 2)
+                self.is_showing_image = True
         else:
             self.close()
 
@@ -42,3 +45,18 @@ class AbsoluteCinemaMode(BaseMode):
             cv2.destroyWindow("Absolute Cinema")
             self.is_showing_image = False
             self.current_image = None
+
+    def fit_image_to_box(self, image):
+        image_height, image_width = image.shape[:2]
+        scale = min(self.box_width / image_width, self.box_height / image_height)
+
+        resized_width = int(image_width * scale)
+        resized_height = int(image_height * scale)
+        resized_image = cv2.resize(image, (resized_width, resized_height))
+
+        canvas = np.zeros((self.box_height, self.box_width, 3), dtype=np.uint8)
+        x_offset = (self.box_width - resized_width) // 2
+        y_offset = (self.box_height - resized_height) // 2
+
+        canvas[y_offset:y_offset + resized_height, x_offset:x_offset + resized_width] = resized_image
+        return canvas

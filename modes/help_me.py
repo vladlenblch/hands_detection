@@ -24,10 +24,9 @@ class HelpMeMode(BaseMode):
             if not self.is_showing_image:
                 self.current_image = cv2.imread("assets/help/cat_girl.png")
 
-                if self.current_image is not None:
-                    cv2.imshow("Help Me", self.current_image)
-                    cv2.moveWindow("Help Me", 550, 250)
-                    self.is_showing_image = True
+                cv2.imshow("Help Me", self.current_image)
+                cv2.moveWindow("Help Me", 525, 190)
+                self.is_showing_image = True
         else:
             self.close()
     

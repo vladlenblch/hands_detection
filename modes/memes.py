@@ -13,11 +13,11 @@ class MemesMode(BaseMode):
             for filename in sorted(os.listdir("assets/memes"))
             if filename.endswith((".png", ".jpg", ".jpeg"))
         ]
-        self.box_width = 912
-        self.box_height = 608
         self.current_index = 0
         self.is_showing_image = False
         self.current_image = None
+        self.box_width = 912
+        self.box_height = 608
         self.left_x_history = deque(maxlen=8)
         self.right_x_history = deque(maxlen=8)
         self.left_seen = False
@@ -43,9 +43,6 @@ class MemesMode(BaseMode):
             self.right_seen = True
     
     def draw_overlay(self, frame):
-        if not self.image_paths:
-            return
-
         if not self.left_seen:
             self.left_x_history.clear()
 
@@ -61,13 +58,29 @@ class MemesMode(BaseMode):
         if self.is_left_hand_swipe_right():
             self.current_index = (self.current_index - 1) % len(self.image_paths)
             self.show_current_image()
-            self.reset_swipe_state()
+            self.left_x_history.clear()
+            self.right_x_history.clear()
+            self.swipe_cooldown = 12
             return
 
         if self.is_right_hand_swipe_left():
             self.current_index = (self.current_index + 1) % len(self.image_paths)
             self.show_current_image()
-            self.reset_swipe_state()
+            self.left_x_history.clear()
+            self.right_x_history.clear()
+            self.swipe_cooldown = 12
+            return
+    
+    def close(self):
+        if self.is_showing_image:
+            cv2.destroyWindow("Memes")
+            self.is_showing_image = False
+            self.current_image = None
+        self.left_x_history.clear()
+        self.right_x_history.clear()
+        self.left_seen = False
+        self.right_seen = False
+        self.swipe_cooldown = 0
 
     def fit_image_to_box(self, image):
         image_height, image_width = image.shape[:2]
@@ -88,11 +101,10 @@ class MemesMode(BaseMode):
         image_path = self.image_paths[self.current_index]
         image = cv2.imread(image_path)
 
-        if image is not None:
-            self.current_image = self.fit_image_to_box(image)
-            cv2.imshow("Memes", self.current_image)
-            cv2.moveWindow("Memes", (1512 - self.box_width) // 2, (982 - self.box_height) // 2)
-            self.is_showing_image = True
+        self.current_image = self.fit_image_to_box(image)
+        cv2.imshow("Memes", self.current_image)
+        cv2.moveWindow("Memes", (1512 - self.box_width) // 2, (982 - self.box_height) // 2)
+        self.is_showing_image = True
 
     def is_left_hand_swipe_right(self):
         if len(self.left_x_history) < self.left_x_history.maxlen:
@@ -105,19 +117,3 @@ class MemesMode(BaseMode):
             return False
 
         return self.right_x_history[-1] - self.right_x_history[0] <= -self.swipe_threshold
-
-    def reset_swipe_state(self):
-        self.left_x_history.clear()
-        self.right_x_history.clear()
-        self.swipe_cooldown = 12
-    
-    def close(self):
-        if self.is_showing_image:
-            cv2.destroyWindow("Memes")
-            self.is_showing_image = False
-            self.current_image = None
-        self.left_x_history.clear()
-        self.right_x_history.clear()
-        self.left_seen = False
-        self.right_seen = False
-        self.swipe_cooldown = 0
