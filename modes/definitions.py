@@ -1,6 +1,6 @@
 import cv2
 
-from recognizer.aggregator import HandGestureRecognizer
+from recognizer.finger_counter import FingerCounter
 
 class BaseMode:
     def __init__(self):
@@ -22,15 +22,14 @@ class LandmarkOnlyMode(BaseMode):
 class FingerCountMode(BaseMode):
     def __init__(self):
         self.name = "Finger Count"
-        self.recognizer = HandGestureRecognizer()
+        self.finger_counter = FingerCounter()
         self.total_fingers = 0
 
     def begin_frame(self):
         self.total_fingers = 0
 
     def process_hand(self, landmarks):
-        gesture_results = self.recognizer.process(landmarks)
-        self.total_fingers += gesture_results["fingers_count"]
+        self.total_fingers += self.finger_counter.detect(landmarks)
 
     def draw_overlay(self, frame):
         label = f"Fingers: {self.total_fingers}"
