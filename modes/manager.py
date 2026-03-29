@@ -179,17 +179,8 @@ class ModeManager:
         if progress <= 0:
             return
 
-        cv2.ellipse(
-            frame,
-            center,
-            (radius + 10, radius + 10),
-            -90,
-            0,
-            int(progress * 360),
-            (255, 255, 255),
-            5,
-            cv2.LINE_AA,
-        )
+        cv2.ellipse(frame, center, (radius + 10, radius + 10), -90, 0,
+                    int(progress * 360), (255, 255, 255), 5, cv2.LINE_AA)
 
     def draw_menu_button(self, frame):
         button_center = self.get_menu_button_center()
