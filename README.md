@@ -28,37 +28,37 @@ python main.py
 
 Базовый режим, установленный по умолчанию, показывает разметки рук в реальном времени.
 Важный нюанс: разметки рук показаны только здесь, чтобы не отвлекать пользователя от функционала в основных режимов.
-![Landmarks demo](assets/visulization/Landmarks.gif)
+![Landmarks demo](assets/visualization/Landmarks.gif)
 
 ### 1) Fingers
 
 Считает количество пальцев, которые показывает пользователь.
-![Fingers demo](assets/visulization/Fingers.gif)
+![Fingers demo](assets/visualization/Fingers.gif)
 
 ### 2) Cinema
 
 Когда пользователь пародирует знаменитый мем с Мартином Скорсезе "Absolute Cinema", на экране появлется случайная картинка с одной из вариацией мема. При повторном жесте показывается новая картинка.
-![Cinema demo](assets/visulization/Cinema.gif)
+![Cinema demo](assets/visualization/Cinema.gif)
 
 ### 3) Help Me
 
 Когда пользователь показывает общепринятный знак о помощи, на экране появляется мем с котом и девочкой. При повторном жесте снова показывается картинка.
-![Help Me demo](assets/visulization/Help_Me.gif)
+![Help Me demo](assets/visualization/Help_Me.gif)
 
 ### 4) Six Seven
 
 Когда пользователь делает жест из нашумевшего мема "Six Seven", на его ладонях появляются цифры 6 и 7 соответственно.
-![Six Seven demo](assets/visulization/Six_Seven.gif)
+![Six Seven demo](assets/visualization/Six_Seven.gif)
 
 ### 5) Memes
 
 У пользователя появляется возможность посмотреть авторскую подборку из почти 50 мемов, которые можно свайпать руками вправо и влево.
-![Memes demo](assets/visulization/Memes.gif)
+![Memes demo](assets/visualization/Memes.gif)
 
 ### 6) Rock
 
 Когда пользователь делает рокерский знак козы, начинает играть значимая (по моему мнению) для музыкальной индустрии рок-песня. При повторном жесте ставится следующая композиция.
-![Rock demo](assets/visulization/Rock.gif)
+![Rock demo](assets/visualization/Rock.gif)
 
 ### 7) Paint
 
@@ -66,17 +66,17 @@ python main.py
 1) Открытая ладонь - режим свободного перемещения руки по экрану.
 2) Указательный палец - режим рисования.
 3) Кулак - режим ластика.
-![Paint demo](assets/visulization/Paint.gif)
+![Paint demo](assets/visualization/Paint.gif)
 
 ### 8) Menu
 
 В левом верхнем углу под надписью с текущим выбранным режимом есть кнопка меню. При удержании указательного пальца на этой кнопке в течение секунды откроется круговое меню со всеми режимами. Режим также выбирается удержанием указательного пальца в течение секунды.
-![Menu demo](assets/visulization/Menu.gif)
+![Menu demo](assets/visualization/Menu.gif)
 
 ### 9) Exit
 
 Чтобы выйти, надо показать непристойный знак - средний палец! Тогда программа обидится и закроется :(
-![Exit demo](assets/visulization/Exit.gif)
+![Exit demo](assets/visualization/Exit.gif)
 
 ## Технологический стек и требования
 
