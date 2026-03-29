@@ -82,6 +82,17 @@ class MemesMode(BaseMode):
         self.right_seen = False
         self.swipe_cooldown = 0
 
+    def hide_external_window(self):
+        if self.is_showing_image:
+            cv2.destroyWindow("Memes")
+            self.is_showing_image = False
+
+    def show_external_window(self):
+        if self.current_image is not None and not self.is_showing_image:
+            cv2.imshow("Memes", self.current_image)
+            cv2.moveWindow("Memes", (1512 - self.box_width) // 2, (982 - self.box_height) // 2)
+            self.is_showing_image = True
+
     def fit_image_to_box(self, image):
         image_height, image_width = image.shape[:2]
         scale = min(self.box_width / image_width, self.box_height / image_height)

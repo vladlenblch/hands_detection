@@ -13,3 +13,9 @@ class BaseMode:
 
     def close(self):
         pass
+
+    def hide_external_window(self):
+        pass
+
+    def show_external_window(self):
+        pass

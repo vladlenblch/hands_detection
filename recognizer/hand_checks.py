@@ -79,3 +79,11 @@ def is_rock_hand(landmarks):
         and not is_finger_up(landmarks, "ring")
         and is_finger_up(landmarks, "pinky")
     )
+
+def is_exit_hand(landmarks):
+    return (
+        not is_finger_up(landmarks, "index")
+        and is_finger_up(landmarks, "middle")
+        and not is_finger_up(landmarks, "ring")
+        and not is_finger_up(landmarks, "pinky")
+    )

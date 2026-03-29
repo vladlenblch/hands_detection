@@ -8,6 +8,7 @@ class HelpMeMode(BaseMode):
         self.name = "Help Me"
         self.finger_counter = FingerCounter()
         self.total_fingers = 0
+        self.hand_detected = False
         self.is_showing_image = False
         self.current_image = None
     
@@ -35,3 +36,14 @@ class HelpMeMode(BaseMode):
             cv2.destroyWindow("Help Me")
             self.is_showing_image = False
             self.current_image = None
+
+    def hide_external_window(self):
+        if self.is_showing_image:
+            cv2.destroyWindow("Help Me")
+            self.is_showing_image = False
+
+    def show_external_window(self):
+        if self.current_image is not None and not self.is_showing_image:
+            cv2.imshow("Help Me", self.current_image)
+            cv2.moveWindow("Help Me", 525, 190)
+            self.is_showing_image = True
